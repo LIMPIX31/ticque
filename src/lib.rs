@@ -104,10 +104,6 @@ impl From<RecvError> for RequestError {
 	}
 }
 
-#[derive(Debug, Error)]
-#[error("failed to send resource")]
-pub struct SendError;
-
 #[cfg(test)]
 mod tests {
 	use super::*;

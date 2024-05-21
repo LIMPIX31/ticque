@@ -1,0 +1,28 @@
+[package]
+name = "ticque"
+version = "0.1.0"
+edition = "2021"
+authors = ["Danil Karpenko <limpix31@gmail.com>"]
+license = "Apache-2.0 OR MIT"
+repository = "https://github.com/limpix31/ticque"
+keywords = ["chan", "futures"]
+categories = ["asynchronous", "concurrency"]
+readme = "readme.md"
+description = "Take a queue for a resource"
+
+[dependencies]
+thiserror = { version = "1" }
+onetime = { version = "0.1" }
+concurrent-queue = { version = "2.5" }
+
+[dev-dependencies]
+smol =  { version = "2" }
+
+[lints.rust]
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+cargo = { level = "warn", priority = -1 }
+all = { level = "warn", priority = -1 }
+unwrap_used = "deny"
+expect_used = "deny"
+must-use-candidate = "allow"

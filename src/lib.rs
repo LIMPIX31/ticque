@@ -22,9 +22,15 @@ impl<T> Deref for Waiters<T> {
 }
 
 /// Customer can request resource from the linked [Vendor]
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct Customer<T> {
 	waiters: Arc<Waiters<T>>,
+}
+
+impl<T> Clone for Customer<T> {
+	fn clone(&self) -> Self {
+		Self { waiters: self.waiters.clone() }
+	}
 }
 
 impl<T> Customer<T> {
@@ -41,9 +47,15 @@ impl<T> Customer<T> {
 
 /// Vendor can send the resource to waiting [Customer]s.
 /// If there is no waiting [Customer]s, resource will be lost
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct Vendor<T> {
 	waiters: Arc<Waiters<T>>,
+}
+
+impl<T> Clone for Vendor<T> {
+	fn clone(&self) -> Self {
+		Self { waiters: self.waiters.clone() }
+	}
 }
 
 impl<T> Default for Vendor<T> {

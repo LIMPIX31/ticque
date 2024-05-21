@@ -41,7 +41,7 @@ impl<T> Customer<T> {
 
 /// Vendor can send the resource to waiting [Customer]s.
 /// If there is no waiting [Customer]s, resource will be lost
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Vendor<T> {
 	waiters: Arc<Waiters<T>>,
 }

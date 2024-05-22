@@ -81,8 +81,20 @@ impl<T> Vendor<T> {
 	where
 		T: Clone,
 	{
-		while let Ok(waiter) = self.waiters.pop() {
-			let _ = waiter.send(resource.clone());
+		if self.waiters_count() == 1 {
+			if let Ok(waiter) = self.waiters.pop() {
+				let _ = waiter.send(resource);
+			}
+		} else {
+			for _ in 0..self.waiters_count() - 1 {
+				if let Ok(waiter) = self.waiters.pop() {
+					let _ = waiter.send(resource.clone());
+				}
+			}
+
+			if let Ok(waiter) = self.waiters.pop() {
+				let _ = waiter.send(resource);
+			}
 		}
 	}
 
